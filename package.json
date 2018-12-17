@@ -1,0 +1,15 @@
+{
+  "name": "readme-preview",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": "https://github.com/KeziahMoselle/readme-preview.git",
+  "author": "KeziahMoselle <keziah.moselle@gmail.com>",
+  "license": "GPL-3.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./src/index"
+  },
+  "dependencies": {
+    "puppeteer": "^1.11.0"
+  }
+}
