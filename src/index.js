@@ -6,16 +6,14 @@ const screenshot = require('./screenshot')
 
 app.use(express.static('public'))
 
-app.get('/', (req, res) => {
-  res.send('/index')
-})
+app.get('/', (req, res) => res.send('/index'))
 
 app.get('/:url', async (req, res) => {
   try {
-    const filePath  = await screenshot(req.params.url)
-    res.redirect(`screenshots/${filePath}`)
+    const fileName  = await screenshot(req.params.url)
+    res.redirect(301, fileName)
   } catch (error) {
-    res.redirect('error.jpg')
+    res.redirect(301, 'website-not-found.jpg')
   }
 })
 

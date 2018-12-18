@@ -1,13 +1,9 @@
-const fs = require('fs')
 const puppeteer = require('puppeteer');
-
-const baseFolder = './public/screenshots/'
 
 async function screenshot (url) {
   // File informations
-  const fileName = `${new Date().getTime()}.jpeg`
-  const filePath = `${url}/${fileName}`
-  const absolutePath = `${baseFolder}${filePath}`
+  const fileName = `${url}.jpeg`
+  const absolutePath = `./public/${fileName}`
 
   // Create browser instance and page
   const browser = await puppeteer.launch({
@@ -19,12 +15,13 @@ async function screenshot (url) {
   const page = await browser.newPage()
   
   // Take a screenshot of the URL
-  await page.goto(`https://${url}`)
-
-  // Create the directory
-  fs.mkdirSync(`${baseFolder}${url}`, { recursive: true } ,(error) => {
-    if (error) console.log(error)
-  })
+  try {
+    await page.goto(`https://${url}`, {
+      waitUntil: 'load'
+    })
+  } catch (error) {
+    throw new Error(error)
+  }
 
   // Take the screenshot
   await page.screenshot({
@@ -33,7 +30,7 @@ async function screenshot (url) {
   })
 
   await browser.close()
-  return filePath
+  return fileName
 }
 
 module.exports = screenshot

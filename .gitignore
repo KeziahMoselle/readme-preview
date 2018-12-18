@@ -62,4 +62,4 @@ typings/
 
 .DS_Store
 
-screenshots
+public/*.jpeg
