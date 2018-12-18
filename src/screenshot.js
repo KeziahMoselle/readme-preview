@@ -9,11 +9,6 @@ async function screenshot (url) {
   const filePath = `${url}/${fileName}`
   const absolutePath = `${baseFolder}${filePath}`
 
-  // Create the directory
-  fs.mkdirSync(`${baseFolder}${url}`, { recursive: true } ,(error) => {
-    if (error) console.log(error)
-  })
-
   // Create browser instance and page
   const browser = await puppeteer.launch({
     defaultViewport: {
@@ -25,6 +20,13 @@ async function screenshot (url) {
   
   // Take a screenshot of the URL
   await page.goto(`https://${url}`)
+
+  // Create the directory
+  fs.mkdirSync(`${baseFolder}${url}`, { recursive: true } ,(error) => {
+    if (error) console.log(error)
+  })
+
+  // Take the screenshot
   await page.screenshot({
     path: absolutePath,
     type: 'jpeg'
