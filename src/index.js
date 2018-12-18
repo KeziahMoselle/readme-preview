@@ -1,23 +1,25 @@
-const puppeteer = require('puppeteer');
+require('dotenv').config()
+const express = require('express')
+const app = express()
 
-(async () => {
-  const url = undefined
+const screenshot = require('./screenshot')
 
-  // Create browser instance and page
-  const browser = await puppeteer.launch({
-    defaultViewport: {
-      width: 1000,
-      height: 600
-    }
-  })
-  const page = await browser.newPage()
-  
-  // Take a screenshot of the URL
-  await page.goto(url)
-  await page.screenshot({
-    path: `./src/screenshots/${new Date().getTime()}.jpeg`,
-    type: 'jpeg'
-  })
+app.use(express.static('public'))
 
-  await browser.close()
-})()
+app.get('/', (req, res) => {
+  res.send('/index')
+})
+
+app.get('/:url', async (req, res) => {
+  try {
+    const filePath  = await screenshot(req.params.url)
+    res.redirect(`screenshots/${filePath}`)
+  } catch (error) {
+    res.redirect('error.jpg')
+  }
+})
+
+app.listen(process.env.PORT, (error) => {
+  if (error) throw new Error(error)
+  console.log(`Server started listening on port ${process.env.PORT}...`)
+})

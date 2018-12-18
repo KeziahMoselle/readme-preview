@@ -7,9 +7,15 @@
   "license": "GPL-3.0",
   "private": true,
   "scripts": {
-    "start": "node ./src/index"
+    "start": "node ./src/index",
+    "dev": "nodemon ./src/index"
   },
   "dependencies": {
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
     "puppeteer": "^1.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
   }
 }
