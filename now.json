@@ -1,4 +1,10 @@
 {
   "version": 2,
-  "name": "readme-preview"
+  "name": "readme-preview",
+  "builds": [
+    {
+      "src": "./src/index.js",
+      "use": "@now/node-server"
+    }
+  ]
 }
