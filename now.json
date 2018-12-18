@@ -3,7 +3,7 @@
   "name": "readme-preview",
   "builds": [
     {
-      "src": "./src/index.js",
+      "src": "*/index.js",
       "use": "@now/node-server"
     }
   ]
