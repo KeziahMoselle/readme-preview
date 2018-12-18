@@ -26,7 +26,8 @@ async function screenshot (url) {
   // Take the screenshot
   await page.screenshot({
     path: absolutePath,
-    type: 'jpeg'
+    type: 'jpeg',
+    quality: 80
   })
 
   await browser.close()
