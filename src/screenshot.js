@@ -10,7 +10,8 @@ async function screenshot (url) {
     headless: true,
     args: [
       '--no-sandbox',
-      '--disable-setuid-sandbox'
+      '--disable-setuid-sandbox',
+      '--disable-gpu'
     ],
     defaultViewport: {
       width: 1000,
