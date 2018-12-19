@@ -7,6 +7,11 @@ async function screenshot (url) {
 
   // Create browser instance and page
   const browser = await puppeteer.launch({
+    headless: true,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox'
+    ],
     defaultViewport: {
       width: 1000,
       height: 600
