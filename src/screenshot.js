@@ -20,12 +20,14 @@ async function screenshot (url) {
   })
   const page = await browser.newPage()
   
-  // Take a screenshot of the URL
+  // Go to the URL
   try {
     await page.goto(`https://${url}`, {
       waitUntil: 'load'
     })
   } catch (error) {
+    // If puppeteer can't access the URL
+    // Throw, so we can redirect to the error .png file
     throw new Error(error)
   }
 
