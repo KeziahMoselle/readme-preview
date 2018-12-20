@@ -6,11 +6,11 @@ const screenshot = require('./screenshot')
 
 app.use(express.static('public'))
 
-app.get('/', (req, res) => res.send('/index'))
+app.get('/', (req, res) => res.redirect('https://readme-preview-front.netlify.com'))
 
 app.get('/:url', async (req, res) => {
   try {
-    const fileName  = await screenshot(req.params.url)
+    const fileName = await screenshot(req.params.url)
     res.redirect(301, fileName)
   } catch (error) {
     res.redirect(301, 'website-not-found.jpg')
